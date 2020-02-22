@@ -12,6 +12,7 @@ import { ButtonGroup } from '../../styles/Buttons.style'
 const CreateSection = styled.section`
   margin-left: 16.65%;
   margin-right: 16.65%;
+  margin-bottom: 20px;
 
   @media (max-width: 800px) { 
     margin-left: 10px;
