@@ -10,6 +10,7 @@ const StyledToolbar = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-left: 0;
 
     li {
       display: inline-block;
@@ -49,6 +50,28 @@ const StyledToolbar = styled.div`
           text-decoration: none;
         }
       }
+    }
+  }
+
+  @media(max-width: 600px) {
+    .create-form-toolbar {
+      flex-wrap: nowrap;
+
+      li {
+        margin-left: 8px;
+        margin-right: 8px;
+        white-space: nowrap;
+
+        .form-toolbar-link {
+          padding: .7rem 1.2rem .4rem 1rem
+        }
+      }
+    }
+  }
+
+  @media(max-width: 400px) {
+    .create-form-toolbar {
+      flex-direction: column;
     }
   }
 `
