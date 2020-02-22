@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Container, Button, Row, Col, Form } from 'react-bootstrap'
 import { attemptLogin } from '../../store/auth'
 import '../../styles/auth.css'
+import axios from 'axios'
 
 
 const emptyLoginForm = {
@@ -36,8 +37,69 @@ export const LoginUI = ({
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    // submit form data
-    attemptLogin(formData.email, formData.password)
+    const loginFormData = new FormData()
+    loginFormData.set("email", formData.email)
+    loginFormData.set("password", formData.password)
+
+    // create request object
+    // const request = new Request("http://api.publicpotluck.com/login", {
+    //   method: 'POST',
+    //   mode: 'no-cors',
+    //   body: loginFormData,
+    //   headers: new Headers({
+    //     'Content-Type': 'application/x-www-form-urlencoded'
+    //   }),
+    //   credentials: "include"
+    // });
+
+    // // submit form data
+    // // attemptLogin(formData.email, formData.password)
+    // fetch(request)
+    //   .then((data) => {
+    //     console.log('success! data:', data)
+    //     // console.log('success! json:', data.json())
+    //   })
+    //   .catch(err => {
+    //     console.log('error:', err)
+    //   })
+
+
+
+    // const transport = axios.create({
+    //   withCredentials: true,
+    // })
+    // axios.defaults.withCredentials = true
+
+    // axios.post("http://api.publicpotluck.com/login", loginFormData, {
+    //   withCredentials: true,
+    //   headers: {
+    //     // "Content-Type": "application/x-www-form-urlencoded",
+    //     "Content-Type": "multipart/form-data",
+    //   },
+    // })
+    fetch("http://api.publicpotluck.com/login", {
+      method: 'post',
+      body: loginFormData
+    })
+      .then(res => {
+        console.log('response:', res)
+      })
+      .catch(function (error) {
+        console.log('error', error);
+      });
+
+      // axios({
+      //   method: 'post',
+      //   url: '"http://api.publicpotluck.com/login"',
+      //   data: loginFormData,
+      //   withCredentials: true
+      // })
+      // .then(res => {
+      //       console.log('response:', res)
+      //     })
+      //     .catch(function (error) {
+      //       console.log('error', error);
+      //     });
     
     resetForm()
   }
