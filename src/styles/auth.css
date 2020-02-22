@@ -9,12 +9,12 @@
   border: 1px solid rgba(0,0,0,.1);
 }
 
-.login-btn {
+.login-btn { /* form-button-group */
   text-align: center;
   margin-top: 1.5rem;
 }
 
-.signup-link-container {
+.form-button-group {
   text-align: center;
   margin-top: 2rem;
 }

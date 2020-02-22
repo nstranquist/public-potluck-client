@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import { Container, Button, Row, Col, Form } from 'react-bootstrap'
 import { attemptLogin } from '../../store/auth'
 import '../../styles/auth.css'
-import axios from 'axios'
+// import axios from 'axios'
+import { ButtonGroup } from '../../styles/Buttons.style'
 
 
 const emptyLoginForm = {
@@ -41,65 +42,8 @@ export const LoginUI = ({
     loginFormData.set("email", formData.email)
     loginFormData.set("password", formData.password)
 
-    // create request object
-    // const request = new Request("http://api.publicpotluck.com/login", {
-    //   method: 'POST',
-    //   mode: 'no-cors',
-    //   body: loginFormData,
-    //   headers: new Headers({
-    //     'Content-Type': 'application/x-www-form-urlencoded'
-    //   }),
-    //   credentials: "include"
-    // });
 
-    // // submit form data
-    // // attemptLogin(formData.email, formData.password)
-    // fetch(request)
-    //   .then((data) => {
-    //     console.log('success! data:', data)
-    //     // console.log('success! json:', data.json())
-    //   })
-    //   .catch(err => {
-    //     console.log('error:', err)
-    //   })
-
-
-
-    // const transport = axios.create({
-    //   withCredentials: true,
-    // })
-    // axios.defaults.withCredentials = true
-
-    // axios.post("http://api.publicpotluck.com/login", loginFormData, {
-    //   withCredentials: true,
-    //   headers: {
-    //     // "Content-Type": "application/x-www-form-urlencoded",
-    //     "Content-Type": "multipart/form-data",
-    //   },
-    // })
-    fetch("http://api.publicpotluck.com/login", {
-      method: 'post',
-      body: loginFormData
-    })
-      .then(res => {
-        console.log('response:', res)
-      })
-      .catch(function (error) {
-        console.log('error', error);
-      });
-
-      // axios({
-      //   method: 'post',
-      //   url: '"http://api.publicpotluck.com/login"',
-      //   data: loginFormData,
-      //   withCredentials: true
-      // })
-      // .then(res => {
-      //       console.log('response:', res)
-      //     })
-      //     .catch(function (error) {
-      //       console.log('error', error);
-      //     });
+    attemptLogin(formData.email, formData.password)
     
     resetForm()
   }
@@ -139,9 +83,9 @@ export const LoginUI = ({
                 <Button type="submit">Login</Button>
               </div>
             </Form>
-            <div className="signup-link-container" style={{textAlign:'center', marginTop:'2rem'}}>
+            <ButtonGroup>
               <Link to="/signup">Don't have an account? Signup Here</Link>
-            </div>
+            </ButtonGroup>
           </section>
         </Col>
       </Row>
@@ -157,3 +101,67 @@ export const Login = connect(
   mapStateToProps,
   { attemptLogin }
 )(LoginUI)
+
+
+// old api code:
+
+    // create request object
+    // const request = new Request("http://api.publicpotluck.com/login", {
+    //   method: 'POST',
+    //   mode: 'no-cors',
+    //   body: loginFormData,
+    //   headers: new Headers({
+    //     'Content-Type': 'application/x-www-form-urlencoded'
+    //   }),
+    //   credentials: "include"
+    // });
+
+    // // submit form data
+    // // attemptLogin(formData.email, formData.password)
+    // fetch(request)
+    //   .then((data) => {
+    //     console.log('success! data:', data)
+    //     // console.log('success! json:', data.json())
+    //   })
+    //   .catch(err => {
+    //     console.log('error:', err)
+    //   })
+
+
+
+    // const transport = axios.create({
+    //   withCredentials: true,
+    // })
+    // axios.defaults.withCredentials = true
+
+    // axios.post("http://api.publicpotluck.com/login", loginFormData, {
+    //   withCredentials: true,
+    //   headers: {
+    //     // "Content-Type": "application/x-www-form-urlencoded",
+    //     "Content-Type": "multipart/form-data",
+    //   },
+    // })
+    // fetch("http://api.publicpotluck.com/login", {
+    //   method: 'post',
+    //   body: loginFormData
+    // })
+    //   .then(res => {
+    //     console.log('response:', res)
+    //     console.log('response body:', res.body.usercookie)
+    //   })
+    //   .catch(function (error) {
+    //     console.log('error', error);
+    //   });
+
+      // axios({
+      //   method: 'post',
+      //   url: '"http://api.publicpotluck.com/login"',
+      //   data: loginFormData,
+      //   withCredentials: true
+      // })
+      // .then(res => {
+      //       console.log('response:', res)
+      //     })
+      //     .catch(function (error) {
+      //       console.log('error', error);
+      //     });
