@@ -1,9 +1,21 @@
 import React from 'react'
-import { Navbar as BSNavbar, Nav } from 'react-bootstrap'
+import { connect } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
+import { Navbar as BSNavbar, Nav, Button } from 'react-bootstrap'
+import { logout } from '../../store/auth'
 
 // note: bootstrap navbar, can add custom css later
-export const Navbar = () => {
+export const NavbarUI = ({
+  profileId,
+  logout,
+}) => {
+
+  const tempId = 893740923
+
+  const handleLogout = () => {
+    logout()
+  }
+
   return (
     <BSNavbar collapseOnSelect expand="md" bg="dark" variant="dark">
       <BSNavbar.Brand href="/">PublicPotluck</BSNavbar.Brand>
@@ -18,11 +30,23 @@ export const Navbar = () => {
           </LinkContainer>
         </Nav>
         <Nav>
-          <LinkContainer to="/profile/:profileId">
+          {/* <LinkContainer to={`/profile/${profileId}`}> */}
+          <LinkContainer to={`/profile/${tempId}`}>
             <Nav.Link>Profile</Nav.Link>
           </LinkContainer>
+          <Button variant="light" size="sm" onClick={handleLogout} style={{marginLeft:10}}>
+            Logout</Button>
         </Nav>
       </BSNavbar.Collapse>
     </BSNavbar>
   )
 }
+
+const mapStateToProps = (state) => ({
+  profileId: state.auth
+})
+
+export const Navbar = connect(
+  mapStateToProps,
+  { logout }
+)(NavbarUI)
