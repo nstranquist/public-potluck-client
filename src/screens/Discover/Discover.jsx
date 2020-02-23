@@ -12,13 +12,44 @@ import { SpinnerSection } from '../../styles/Spinner.style'
 
 
 const EventCard = styled(Card)`
+  margin-bottom: 6px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 120;
+
+  .image-left {
+    margin: 5px auto;
+    min-width: 110px;
+    text-align: center;
+
+    .event-card-image {
+      border-radius: 8px;
+      max-height: 110px;
+      max-width: 110px;
+      height: 110px;
+      width: auto;
+      margin: 0 auto;
+    }
+  }
+
+  .content-body {
+    margin-left: 12px;
+    flex: 1;
+    flex-grow: 1;
+  }
+
+
   .img-fluid {
     max-height: 100%;
     width: auto;
   }
 
-  h1 {
+  h3.event-card-title {
+    padding-top: 15px;
+    padding-bottom: 15px;
     cursor: pointer;
+    font-size: 1.6rem;
 
     &:hover {
       text-decoration: underline;
@@ -49,7 +80,7 @@ export const DiscoverUI = ({
       <Container fluid>
         <Row>
           {/* Events List */}
-          <Col md="5" lg="4">
+          <Col md="5">
             <SpinnerSection className="events-list-container">
               {loading ? (
                 <div className="spinner-container">
@@ -64,18 +95,15 @@ export const DiscoverUI = ({
                     // TODO: make its own component
                     return (
                       <EventCard key={index}>
-                        <Row>
-                          <Col size="3">
-                            {/* Image Thumbnail */}
-                            <img height={100} className="img-fluid" src={event.img_url} alt="image for event item" />
-                          </Col>
-                          <Col size="9">
-                            <LinkContainer to={`/events/${event._id}`}>
-                              <h1>{event.event_name}</h1>
-                            </LinkContainer>
-                            <p>{event.event_description}</p>
-                          </Col>
-                        </Row>
+                        <div className="image-left">
+                          <img className="event-card-image" src={event.img_url} alt="(no image)" />
+                        </div>
+                        <div className="content-body">
+                          <LinkContainer to={`/events/${event._id}`}>
+                            <h3 className="event-card-title">{event.event_name}</h3>
+                          </LinkContainer>
+                          <p>{event.event_description!=="" && event.event_description}</p>
+                        </div>
                       </EventCard>
                     )
                   }) : (
@@ -89,8 +117,8 @@ export const DiscoverUI = ({
           </Col>
           {/* Event Map */}
           {/* todo: on mobile screen, pull up */}
-          <Col md="7" lg="8">
-            <MapboxMap events={events} />
+          <Col md="7">
+            <MapboxMap events={mapEvents} />
           </Col>
         </Row>
       </Container>

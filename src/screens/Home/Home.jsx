@@ -13,27 +13,27 @@ export const Home = () => {
       <section className="home-section">
         <h1>We're On A Mission</h1>
         <h2>To Bring People Together Around Food</h2>
-        <img src="https://storage.googleapis.com/publicpotluck/UaQzWNXXmeCgcaDxOzymxzEcWVVrab..jpg" alt="" class="img-fluid"/>
+        <img src="https://storage.googleapis.com/publicpotluck/UaQzWNXXmeCgcaDxOzymxzEcWVVrab..jpg" alt="a welcome image from potluck" className="img-fluid"/>
       </section>
       <section className="call-out right">
         <h2>Healthy Cooked Meals and Great Company</h2>
         <h3>Do Good For The Body and The Mind</h3>
-        <img src="https://storage.googleapis.com/publicpotluck/lLFtlEInFrdqwIwjTCldhLzOARTJfl..jpg" alt="" class="img-fluid"/>
+        <img src="https://storage.googleapis.com/publicpotluck/lLFtlEInFrdqwIwjTCldhLzOARTJfl..jpg" alt="a welcome image from potluck" className="img-fluid"/>
       </section>
       <section className="call-out">
         <h2>Everyone Should Have Access to a Nice Meal</h2>
         <h3>Even Those Without Access to Healthy Foods</h3>
-        <img src="https://storage.googleapis.com/publicpotluck/BSmmICQSeciRqCDAmTzIlJMXuftKkh..jpg" alt="" class="img-fluid"/>
+        <img src="https://storage.googleapis.com/publicpotluck/BSmmICQSeciRqCDAmTzIlJMXuftKkh..jpg" alt="a welcome image from potluck" className="img-fluid"/>
       </section>
       <section className="call-out right">
         <h2>Reduce Waste</h2>
         <h3>Don't Let Anything Go to Waste, Offer Your Leftovers to The Community</h3>
-        <img src="https://storage.googleapis.com/publicpotluck/VbRyUCMWMTchKfndYluwPREhsklkML..jpg" alt="" class="img-fluid"/>
+        <img src="https://storage.googleapis.com/publicpotluck/VbRyUCMWMTchKfndYluwPREhsklkML..jpg" alt="a welcome image from potluck" className="img-fluid"/>
       </section>
       <section className="call-out">
         <h2>Connect on Campus</h2>
         <h3>Chow Down With Other Students, Maybe Try Something New</h3>
-        <img src="https://storage.googleapis.com/publicpotluck/DPmCRBVpHJEYOWTwfTIOJnQvLIBqLr..jpg" alt="" class="img-fluid"/>
+        <img src="https://storage.googleapis.com/publicpotluck/DPmCRBVpHJEYOWTwfTIOJnQvLIBqLr..jpg" alt="a welcome image from potluck" className="img-fluid"/>
       </section>
       <section className="call-out center">
         <h2>Make A Difference</h2>
