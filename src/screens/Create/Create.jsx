@@ -87,7 +87,7 @@ export const Create = () => {
     console.log('form data:', formData)
     setFormData({
       ...formData,
-      date_time: new Date(formData.date_time).now()
+      date_time: new Date()
     })
 
   

@@ -10,7 +10,7 @@ export const configureStore = () => {
     compose (
       applyMiddleware(thunk),
       // this code enables redux devtools
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+   //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )
   )
 
