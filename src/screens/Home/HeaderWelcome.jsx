@@ -10,8 +10,7 @@ export const HeaderWelcome = () => {
   }
 
   return (
-    <div className="header-welcome" style={{background:'blue',marginTop:15,marginBottom:15, textAlign:'center',color:'white'}}>
-      <h6>Welcome</h6>
+    <div className="header-welcome" style={{marginBottom:15, textAlign:'center',color:'white',height:'400px'}}>
       <LinkContainer to="/discover">
         <Button>Discover</Button>
       </LinkContainer>
