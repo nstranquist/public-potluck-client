@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Navbar } from '../../components/layout'
-import { Container, Spinner, Row, Col } from 'react-bootstrap'
+import { Container, Spinner, Row, Col, Button } from 'react-bootstrap'
 import { StyledHeader } from '../../styles/Layout.style'
 import { SpinnerContainer } from '../../styles/Spinner.style'
 import axios from 'axios'
@@ -188,7 +188,7 @@ export const EventDetail = ({
 
           {/* Other Content: */}
           {/* Icons for different things? */}
-          <div className="icons-box">
+          <div className="icons-box" style={{borderBottom:'1px solid rgba(0,0,0,.1)'}}>
             <ul className="event-icon-items-list">
               {/* Leftovers */}
               <div className="icon-item">
@@ -200,7 +200,20 @@ export const EventDetail = ({
                   <span>{event.leftovers}</span>
                 </div>
               </div>
+              <div className="icon-item">
+                ...more icons
+              </div>
             </ul>
+          </div>  
+
+          <div className="donations" style={{marginTop: 55, borderBottom:'1px solid rgba(0,0,0,.1)'}}>
+            <h1>Click Here to Donate</h1>
+          </div>
+
+          <div className="fundraising" style={{marginTop: 55, borderBottom:'1px solid rgba(0,0,0,.1)'}}>
+            <h1>Current Volunteers: 6</h1>
+            <h2>Remaining positions: 3</h2>
+            <Button>Volunteer</Button>
           </div>
         </section>
       </Container>

@@ -10,6 +10,7 @@ export const Home = () => {
       <Navbar />
 
       <HeaderWelcome />
+      
       <section className="home-section">
         <h1>We're On A Mission</h1>
         <h2>To Bring People Together Around Food</h2>
