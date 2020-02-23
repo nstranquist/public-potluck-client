@@ -78,10 +78,10 @@ export const DiscoverUI = ({
     <div>
       <Navbar />
       <Container fluid>
-        <Row>
+        <Row style={{maxHeight:"calc(100vh - 60px)"}}>
           {/* Events List */}
-          <Col md="5">
-            <SpinnerSection className="events-list-container">
+          <Col md="5" style={{maxHeight:"calc(100vh - 60px)", paddingRight:0,paddingLeft:0}}>
+            <SpinnerSection className="events-list-container" style={{maxHeight:"calc(100vh - 60px)", overflow:'auto'}}>
               {loading ? (
                 <div className="spinner-container">
                   {/* Position Absolute */}
@@ -117,7 +117,7 @@ export const DiscoverUI = ({
           </Col>
           {/* Event Map */}
           {/* todo: on mobile screen, pull up */}
-          <Col md="7">
+          <Col md="7" style={{paddingRight:0,paddingLeft:0}}>
             <MapboxMap events={mapEvents} />
           </Col>
         </Row>
