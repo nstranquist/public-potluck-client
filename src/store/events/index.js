@@ -20,9 +20,10 @@ const BASE_URL = "http://api.publicpotluck.com"
 // Events actions
 export const getEvents = () => (dispatch) => {
   // call api, then dispatch events to redux
-  axios.get(BASE_URL + '/get/events')
+  axios.get(BASE_URL + '/events/St. Louis')
     .then(res => {
-      console.log('response:', res, 'json:', res.json(), 'data:', res.data, 'datajson:', res.data.json())
+      console.log('response:', res, 'res.data:', res.data)
+      
     })
     .catch(err => {
       console.log('error:', err)
