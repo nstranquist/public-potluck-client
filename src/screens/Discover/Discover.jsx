@@ -7,8 +7,9 @@ import { Navbar } from '../../components/layout/NavbarHome'
 import { Row, Col } from 'react-bootstrap'
 import { getEvents, addEvent, updateEvent, deleteEvent } from '../../store/events'
 import { MapboxMap } from '../../components/Map'
-import { selectEventsForMap } from '../../store/selectors'
+import { selectEventsForMap, selectEventsByFilter } from '../../store/selectors'
 import { SpinnerSection } from '../../styles/Spinner.style'
+import { DiscoverToolbar } from './DiscoverToolbar'
 
 
 const EventCard = styled(Card)`
@@ -17,9 +18,10 @@ const EventCard = styled(Card)`
   flex-direction: row;
   justify-content: space-between;
   height: 120;
+  border-radius:8px;
 
   .image-left {
-    margin: 5px auto;
+    margin: 1px auto;
     min-width: 110px;
     text-align: center;
 
@@ -58,11 +60,10 @@ const EventCard = styled(Card)`
 `
 
 export const DiscoverUI = ({
-  events: {
-    events,
-    loading,
-    errors
-  },
+  events,
+  isFoodDesert,
+  loading,
+  errors,
   mapEvents,
   getEvents,
   addEvent,
@@ -74,9 +75,15 @@ export const DiscoverUI = ({
     getEvents()
   }, [])
 
+  useEffect(() => {
+    // do something to toggle the food desert coordinates on mapbox
+    
+  }, [isFoodDesert])
+
   return (
     <div>
       <Navbar />
+      <DiscoverToolbar />
       <Container fluid>
         <Row style={{maxHeight:"calc(100vh - 60px)"}}>
           {/* Events List */}
@@ -89,7 +96,7 @@ export const DiscoverUI = ({
                     <span className="sr-only">Loading...</span>
                   </Spinner>
                 </div>
-              ) : (
+              ) : !errors ? (
                 <ul className="events-list">
                   {events.length > 0 ? events.map((event, index) => {
                     // TODO: make its own component
@@ -112,6 +119,10 @@ export const DiscoverUI = ({
                     </div>
                   )}
                 </ul>
+              ) : (
+                <div>
+                  <p className="error-text">There was an error.</p>
+                </div>
               )}
             </SpinnerSection>
           </Col>
@@ -127,7 +138,10 @@ export const DiscoverUI = ({
 }
 
 const mapStateToProps = (state) => ({
-  events: state.events,
+  events: selectEventsByFilter(state),
+  isFoodDesert: state.events.isFoodDesert,
+  loading: state.events.loading,
+  errors: state.events.errors,
   mapEvents: selectEventsForMap(state)
 })
 

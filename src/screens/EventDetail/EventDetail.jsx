@@ -22,6 +22,8 @@ const StyledEventDetail = styled.div`
 
     .header-description {
       font-size: 1.1rem;
+      margin-top: 10px;
+      margin-bottom: 5px;
     }
 
     .image-left {
@@ -31,9 +33,10 @@ const StyledEventDetail = styled.div`
 
       img {
         min-height: 150px;
-        height: 100%;
+        height: 200px;
         max-height: 20vh;
-        width: 100%;
+        width: auto;
+        max-width: 346px;
         margin: 0 auto;
       }
     }
@@ -82,6 +85,15 @@ const StyledEventDetail = styled.div`
       justify-content: space-between;
       font-size: 1.4rem;
       opacity: .8;
+
+      .item-left {
+        padding: 8px;
+        line-height: 1.4;
+        font-family: sans-serif;
+      }
+      .item-right {
+
+      }
     }
   }
 `
@@ -146,7 +158,7 @@ export const EventDetail = ({
       <Container>
         <header className="event-detail-header" style={{borderBottom:"1px solid rgba(0,0,0,.12)"}}>
           <div className="image-left">
-            <img src={event.img_url} alt="the event image" className="img-fluid" />
+            <img src={event.img_url} alt="the event image" />
           </div>
           <div className="header-right-body">
             <div className="top">
@@ -155,7 +167,7 @@ export const EventDetail = ({
             </div>
             <div className="bottom">
               <div className="tags-bar">
-                <span style={{marginRight:10}}>tags: </span>
+                <span style={{marginRight:15, fontSize:'1.2rem'}}>tags: </span>
                 {event.tags.length > 0 ? event.tags.map((tag, index) => (
                   <CircleButton key={index} tag={tag}>
                     <span>{tag}</span>
@@ -177,37 +189,50 @@ export const EventDetail = ({
           {/* Other Content: */}
           {/* Icons for different things? */}
           <div className="icons-box">
-            {/* A 4x2 icons box, 2 cols and 4 rows */}
-            <Row gutters={[16,16]}>
+            <ul className="event-icon-items-list">
               {/* Leftovers */}
-              <Col md={{span: 4, offset: 2}}>
-                <div className="icon-item">
-                  <div className="item-left">
-                    <GiOpenedFoodCan style={{marginRight:8, fontSize:'1.6rem'}} />
-                    <span>Leftovers</span>
-                  </div>
-                  <div className="item-right">
-                    <span>{event.leftovers}</span>
-                  </div>
+              <div className="icon-item">
+                <div className="item-left">
+                  <GiOpenedFoodCan style={{marginRight:10, fontSize:'1.6rem'}} />
+                  <span>Leftovers</span>
                 </div>
-              </Col>
-
-              {/*  */}
-              <Col md={{span: 4, offset: 2}}>
-                <div className="icon-item">
-                  <div className="item-left">
-                    <GiOpenedFoodCan />
-                    <span>Leftovers</span>
-                  </div>
-                  <div className="item-right">
-                    <span>{event.leftovers}</span>
-                  </div>
+                <div className="item-right">
+                  <span>{event.leftovers}</span>
                 </div>
-              </Col>
-            </Row>
+              </div>
+            </ul>
           </div>
         </section>
       </Container>
     </StyledEventDetail>
   )
 }
+
+// old code (icon box grid)
+/* <Row gutters={[16,16]}> */
+  /* Leftovers */
+  /* <Col md={{span: 4, offset: 1}}>
+    <div className="icon-item">
+      <div className="item-left">
+        <GiOpenedFoodCan style={{marginRight:10, fontSize:'1.6rem'}} />
+        <span>Leftovers</span>
+      </div>
+      <div className="item-right">
+        <span>{event.leftovers}</span>
+      </div>
+    </div>
+  </Col> */
+
+  /*  */
+  /* <Col md={{span: 4, offset: 1}}>
+    <div className="icon-item">
+      <div className="item-left">
+        <GiOpenedFoodCan />
+        <span>Leftovers</span>
+      </div>
+      <div className="item-right">
+        <span>{event.leftovers}</span>
+      </div>
+    </div>
+  </Col>
+</Row> */

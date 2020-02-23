@@ -37,4 +37,10 @@ export const SpinnerSection = styled.section`
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
+  .events-list {
+    padding-left: 15px;
+    padding-right: 6px;
+    margin-top: 8px;
+  }
 `

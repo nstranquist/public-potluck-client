@@ -10,6 +10,7 @@ const DELETE_EVENT = 'DELETE_EVENT'
 const ADD_FILTER = 'ADD_FILTER'
 const REMOVE_FILTER = 'REMOVE_FILTER'
 const RESET_FILTERS = 'RESET_FILTERS'
+const TOGGLE_FOOD_DESERT = 'TOGGLE_FOOD_DESERT'
 // Status action types
 const SET_LOADING = 'SET_LOADING'
 const SET_ERROR = 'SET_ERROR'
@@ -32,6 +33,7 @@ export const getEvents = () => dispatch => {
 }
 
 export const addEvent = (eventData) => (dispatch) => {
+  console.log("called addEvent with data:", eventData)
   //axios.post(BASE_URL + '/create/event')
   //  .then(res => {
   //    console.log('res:', res)
@@ -42,10 +44,34 @@ export const addEvent = (eventData) => (dispatch) => {
   //  })
 }
 export const updateEvent = (eventData) => (dispatch) => {
-  console.log('called updateEvent')
+  console.log('called updateEvent with data:', eventData)
 }
 export const deleteEvent = (id) => (dispatch) => {
+  console.log('called deleteEvent with id:', id)
   //axios.delete(BASE_URL + '/delete/event').then((res) => {}).catch(err => {})
+}
+
+export const addFilter = (tag) => {
+  return {
+    type: ADD_FILTER,
+    tag
+  }
+}
+export const removeFilter = (tag) => {
+  return {
+    type: REMOVE_FILTER,
+    tag
+  }
+}
+export const resetFilters = () => {
+  return {
+    type: RESET_FILTERS,
+  }
+}
+export const toggleFoodDesert = () => {
+  return {
+    type: TOGGLE_FOOD_DESERT
+  }
 }
 
 
@@ -53,6 +79,7 @@ export const deleteEvent = (id) => (dispatch) => {
 const initialState = {
   events: [],
   filters: [],
+  isFoodDesert: false,
   loading: false,
   errors: null
 }
@@ -105,7 +132,34 @@ export default (
     case SET_ERROR:
       return {
         ...state,
-        errors: action.err
+        errors: action.err,
+        loading: false
+      }
+    case ADD_FILTER:
+      if(!state.filters.includes(action.tag)) {
+        return {
+          ...state,
+          filters: [
+            ...state.filters,
+            action.tag
+          ]
+        }
+      }
+      else return state
+    case REMOVE_FILTER:
+      return {
+        ...state,
+        filters: state.filters.filter(filter => filter !== action.tag)
+      }
+    case RESET_FILTERS:
+      return {
+        ...state,
+        filters: []
+      }
+    case TOGGLE_FOOD_DESERT:
+      return {
+        ...state,
+        isFoodDesert: !state.isFoodDesert,
       }
     default:
       return state;

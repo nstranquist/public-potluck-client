@@ -1,5 +1,6 @@
 import { Discover } from './Discover'
+import { DiscoverToolbar } from './DiscoverToolbar'
 
 export {
-  Discover, 
+  Discover, DiscoverToolbar
 }
