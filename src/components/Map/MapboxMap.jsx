@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl'
-
+import axios from 'axios'
 
 const MapView = ReactMapboxGl({
   minZoom: 11,
@@ -30,7 +30,11 @@ export class MapboxMap extends React.Component {
   }
 
   render() {
-    const { events } = this.props
+    // axios.get('http://api.publicpotluck.com/events/geo?city=St.%20Louis')
+    // .then(res => {
+    //   console.log(res.data)
+    // });
+    const { events } = this.props;
     const { viewport, bounds } = this.state;
     return (
       <MapView
@@ -48,12 +52,16 @@ export class MapboxMap extends React.Component {
         <Layer
           type="symbol"
           id="marker"
-          layout={{ "icon-image": "marker-15" }}>
-          {events.map((event, index) => {
-            let shopCoords = event.coordinates
-            if(shopCoords)
-              return <Feature coordinates={shopCoords} key={index} />
-          })}
+          layout={{ "icon-image": "star-15" }}>
+          <Feature coordinates={[-90.283466,38.644081]} />
+          <Feature coordinates={[-90.2223874,38.6667982]} />
+          <Feature coordinates={[-90.2138657,38.6157046]} />
+          <Feature coordinates={[-90.2002909,38.6336407]} />
+          <Feature coordinates={[-90.2570502,38.6079207]} />
+          
+          <Feature coordinates={[-90.283466,38.644081]} />
+          <Feature coordinates={[-90.283466,38.644081]} />
+          <Feature coordinates={[-90.283466,38.644081]} />
         </Layer>
       </MapView>
     )
