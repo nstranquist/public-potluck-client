@@ -1,46 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
+import React, { useState } from 'react'
 import { Navbar } from '../../components/layout/NavbarHome'
 import axios from 'axios'
 import { Header, Toolbar } from './index'
 import { Container, Form, Button } from 'react-bootstrap'
-import { ButtonGroup } from '../../styles/Buttons.style'
+import { ButtonGroup, CircleButton } from '../../styles/Buttons.style'
+import { CreateSection } from '../../styles/Layout.style'
 
-// axios.post("http://api.publicpotluck.com/create/event")
-
-
-const CreateSection = styled.section`
-  margin-left: 16.65%;
-  margin-right: 16.65%;
-  margin-bottom: 20px;
-
-  @media (max-width: 800px) { 
-    margin-left: 10px;
-    margin-right: 10px;
-
-    .circle-button {
-      margin-bottom: 10px;
-    }
-  }
-`
-const CircleButton = styled.div`
-  padding: 5px 10px;
-  border-radius: 15px;
-  background: white;
-  color: rgba(0,0,0,.6);
-  border: 1px solid rgba(0,0,0,.3);
-  transition: .1s ease-in-out;
-  text-align: center;
-  display: inline-block;
-  margin-right: 4px;
-  cursor: pointer;  
-
-  &.active {
-    color: rgba(0,0,0,.9);
-    border: 1px solid rgba(0,0,0,.6);
-    transition: .1s ease-in-out;
-  }
-`
 
 const emptyCreateForm = {
   // event section:
@@ -58,6 +23,7 @@ const emptyCreateForm = {
   tags: [],
   price: "",
   fund_goal: "",
+  img: {},
   // approval: true, // last
 }
 
@@ -73,11 +39,10 @@ const tags = [
 ]
 
 const BASE_URL = "http://api.publicpotluck.com"
-// PHONE UPLOAD AND VIDEO UPLOAD
 
 export const Create = () => {
   const [formData, setFormData] = useState(emptyCreateForm)
-  const [formStep, setFormStep] = useState(0) // how many steps? max: 3
+  const [formStep, setFormStep] = useState(0) // how many steps? max: 4
 
   const handleChange = (e) => {
     if(e.target.name==="leftovers") {
@@ -149,7 +114,7 @@ export const Create = () => {
   const handleNext = (e) => {
     e.preventDefault()
 
-    if(formStep < 2)
+    if(formStep < 3)
       setFormStep(formStep + 1)
     else
       handleSubmit(e)
@@ -160,6 +125,18 @@ export const Create = () => {
     if(formStep > 0)
       setFormStep(formStep - 1)
     else setFormStep(0)
+  }
+
+  const handleImageChange = (e) => {
+    console.log('files:', e.target.files[0])
+    if(e.target.files[0]) {
+      setFormData({
+        ...formData,
+        img: {
+          ...e.target.files[0]
+        }
+      })
+    }
   }
 
   const EventForm = () => (
@@ -205,7 +182,7 @@ export const Create = () => {
   )
 
   const ExtrasForm = () => (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleNext}>
       <Form.Group>
         <Form.Label style={{ marginRight: 10 }}>Will there be Leftovers?</Form.Label>
         <input type="checkbox" name="leftovers" onChange={handleChange} />
@@ -234,6 +211,21 @@ export const Create = () => {
       </Form.Group>
       <ButtonGroup>
         <Button variant="light" className="back-btn" onClick={handlePrevious}>Back</Button>
+        <Button type="submit" className="next-btn">Next</Button>
+      </ButtonGroup>
+    </Form>
+  )
+
+  const ImageForm = () => (
+    <Form onSubmit={handleSubmit}>
+      <Form.Group>
+        <Form.Label>Image Upload</Form.Label>
+        <div>
+          <input type="file" accept="image/*;capture=camera" name="img" onChange={handleImageChange} />
+        </div>
+      </Form.Group>
+      <ButtonGroup>
+        <Button variant="light" className="back-btn" onClick={handlePrevious}>Back</Button>
         <Button type="submit" className="next-btn">Create Event</Button>
       </ButtonGroup>
     </Form>
@@ -246,6 +238,8 @@ export const Create = () => {
       return LocationForm()
     else if(formStep===2)
       return ExtrasForm()
+    else if(formStep===3)
+      return ImageForm()
   }
 
   return (
