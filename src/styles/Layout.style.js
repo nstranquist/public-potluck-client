@@ -30,6 +30,7 @@ export const StyledHeader = styled.header`
 
   .header-description {
     font-color: rgba(0,0,0,.6);
+    font-size: 1.05rem;
   }
 
   @media (max-width: 800px) {

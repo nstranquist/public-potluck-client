@@ -5,6 +5,7 @@ import { Header, Toolbar } from './index'
 import { Container, Form, Button } from 'react-bootstrap'
 import { ButtonGroup, CircleButton } from '../../styles/Buttons.style'
 import { CreateSection } from '../../styles/Layout.style'
+import { isObjectEmpty } from '../../utils/isObjectEmpty'
 
 
 const emptyCreateForm = {
@@ -23,7 +24,7 @@ const emptyCreateForm = {
   tags: [],
   price: "",
   fund_goal: "",
-  img: {},
+  // img: {},
   // approval: true, // last
 }
 
@@ -43,6 +44,7 @@ const BASE_URL = "http://api.publicpotluck.com"
 export const Create = () => {
   const [formData, setFormData] = useState(emptyCreateForm)
   const [formStep, setFormStep] = useState(0) // how many steps? max: 4
+  const [imageUpload, setImageUpload] = useState({})
 
   const handleChange = (e) => {
     if(e.target.name==="leftovers") {
@@ -88,27 +90,41 @@ export const Create = () => {
       date_time: new Date(formData.date_time).getTime()
     })
 
-    const res = {
-      ...formData,
-      host_name: "Nico Stranquist"
-    }
   
-    // post to api
-    axios.post(BASE_URL + '/create/event', JSON.stringify(res), {
-      headers: {
-        "Content-Type": 'application/json'
-      }
-    })
-      .then(res => {
-        console.log('res:', res)
-        resetForm()
-      })
-      .catch(err => console.log('err:', err))
+    if(!isObjectEmpty(imageUpload)) {
+      const imgPayload = new FormData()
+      imgPayload.append("img", imageUpload)
+      // post to api
+      axios.post(BASE_URL + '/upload', imgPayload)
+        .then(resData => {
+          console.log('resData:', resData)
+          console.log('res url:', resData.data.img_url)
+          const payload = {
+            ...formData,
+            host_name: "Nico Stranquist",
+            img_url: resData.data.img_url
+          }
+          axios.post(BASE_URL + '/create/event', JSON.stringify(payload), {
+            headers: {
+              "Content-Type": 'application/json'
+            }
+          })
+            .then(res => {
+              console.log('res:', res)
+              resetForm()
+            })
+            .catch(err => console.log('err:', err))
+        })
+        .catch(err => console.log('error:', err))
+    }
+    else
+      alert("tried to post empty img object")
   }
   
   const resetForm = () => {
     setFormData(emptyCreateForm)
     setFormStep(0)
+    setImageUpload({})
   }
 
   const handleNext = (e) => {
@@ -130,12 +146,7 @@ export const Create = () => {
   const handleImageChange = (e) => {
     console.log('files:', e.target.files[0])
     if(e.target.files[0]) {
-      setFormData({
-        ...formData,
-        img: {
-          ...e.target.files[0]
-        }
-      })
+      setImageUpload(e.target.files[0])
     }
   }
 
