@@ -8,6 +8,7 @@ import { Home } from './screens/Home'
 import { Discover } from './screens/Discover'
 import { Create } from './screens/Create'
 import { Profile } from './screens/Profile'
+import { EventDetail } from './screens/EventDetail';
 
 const PageNotFound = () => (
   <div>
@@ -30,6 +31,7 @@ function AppRoutes({
           <PrivateRoute exact path="/discover" component={Discover} />
           <PrivateRoute exact path="/create" component={Create} />
           <PrivateRoute exact path="/profile/:profileId" component={Profile} />
+          <Route exact path="/events/:eventId" component={EventDetail} />
           {/* <Route path="/" component={PageNotFound} /> */}
           <Route path="/" render={() => {
             return <Redirect to="/" />

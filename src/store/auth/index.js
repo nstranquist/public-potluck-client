@@ -1,6 +1,7 @@
 
 
 // auth types
+const SET_USER = 'SET_USER'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 const LOGIN_ERROR = 'LOGIN_ERROR'
 const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
@@ -16,7 +17,15 @@ export const attemptLogin = (email, password) => (dispatch) => {
   
   // if response received is ok (200?) then dispatch authenticate
 
+  dispatch({
+    type: SET_USER,
+    user: {
+      email,
+      password
+    }
+  })
   // else dispatch set_error
+
 
 
   // FOR TESTING ONLY:

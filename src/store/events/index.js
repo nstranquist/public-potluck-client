@@ -2,7 +2,7 @@ import axios from 'axios'
 
 
 // Event action types
-const GET_EVENTS = 'GET_EVENTS'
+const SET_EVENTS = 'SET_EVENTS'
 const ADD_EVENT = 'ADD_EVENT'
 const UPDATE_EVENT = 'UPDATE_EVENT'
 const DELETE_EVENT = 'DELETE_EVENT'
@@ -16,17 +16,18 @@ const SET_ERROR = 'SET_ERROR'
 
 const BASE_URL = "http://api.publicpotluck.com"
 
-
 // Events actions
-export const getEvents = () => (dispatch) => {
+export const getEvents = () => dispatch => {
   // call api, then dispatch events to redux
-  axios.get(BASE_URL + '/events/St. Louis')
+  dispatch({ type: SET_LOADING })
+  axios.get(BASE_URL + '/events?city=St. Louis')
     .then(res => {
       console.log('response:', res, 'res.data:', res.data)
-      
+      dispatch({ type: SET_EVENTS, events: res.data })
     })
     .catch(err => {
       console.log('error:', err)
+      dispatch({ type: SET_ERROR, err })
     })
 }
 
@@ -39,6 +40,9 @@ export const addEvent = (eventData) => (dispatch) => {
   //  .catch(err => {
   //    console.log('error:', err)
   //  })
+}
+export const updateEvent = (eventData) => (dispatch) => {
+  console.log('called updateEvent')
 }
 export const deleteEvent = (id) => (dispatch) => {
   //axios.delete(BASE_URL + '/delete/event').then((res) => {}).catch(err => {})
@@ -57,8 +61,9 @@ export default (
   state=initialState,
   action
 ) => {
-  switch(action) {
-    case GET_EVENTS:
+  switch(action.type) {
+    case SET_EVENTS:
+      console.log('action.events:', action.events)
       return {
         ...state,
         events: action.events,
