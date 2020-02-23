@@ -27,8 +27,8 @@ export const CircleButton = styled.div`
   cursor: pointer;  
 
   &.active {
-    color: rgba(0,0,0,.9);
-    border: 1px solid rgba(0,0,0,.6);
+    color: rgba(0,0,0,.95);
+    border: 1px solid rgba(0,0,0,.75);
     transition: .1s ease-in-out;
   }
 `

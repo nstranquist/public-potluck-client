@@ -14,7 +14,7 @@ const emptyCreateForm = {
   date_time: new Date(),
   duration: "00:00",
   // location section:
-  city: "",
+  city: "St. Louis",
   location_name: "",
   location_address: "",
   // extra details:
@@ -164,7 +164,15 @@ export const Create = () => {
     <Form onSubmit={handleNext}>
       <Form.Group>
         <Form.Label>City</Form.Label>
-        <Form.Control autoFocus name="city" onChange={handleChange} value={formData.city} />
+        <Form.Control autoFocus as="select" name="city" onChange={handleChange} value={formData.city}>
+          <option>St. Louis</option>
+          <option disabled>Kansas City</option>
+          <option disabled>Jefferson City</option>
+          <option disabled>Chicago</option>
+          <option disabled>San Francisco</option>
+          <option disabled>New York</option>
+          <option disabled>Las Vegas</option>
+        </Form.Control>
       </Form.Group>
       <Form.Group>
         <Form.Label>Name of Location</Form.Label>
